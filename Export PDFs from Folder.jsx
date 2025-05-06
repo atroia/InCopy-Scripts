@@ -1,36 +1,38 @@
 /* --------------------------------------
 Export PDFs from Folder
 by Aaron Troia (@atroia)
-Modified Date: 05/05/25
+Modified Date: 05/06/25
 
 Description: 
 Allow Export of both Layout and Story views in InCopy 
 from folder.
+
+Change Log:
+v1.0.1 - added iteration into myTotalDocs so that 
+exportGallery() and exportLayout() would only run on one
+open file and once run, close the files. Added try block
+to main()
 -------------------------------------- */
 
 var scptName = "Export PDFs from Folder";
-var scptVersion = "v1.0.0";
+var scptVersion = "v1.0.1";
 var thePath;
 var FULL;
 
 function main() {
-  openFiles();
-  exportFiles();
+  try{
+    openFiles();
+  } catch (e) {
+    alert(e.line);
+  }
 }
-
 
 function openFiles() {
   var myDocs = Folder.selectDialog("Select a folder with InCopy assignments");
   if (!myDocs) exit(0);
   var myTotalDocs = myDocs.getFiles("*.icma");
   for (var i = myTotalDocs.length - 1; i >= 0; i--) {
-      app.open(myTotalDocs);
-  }
-}
-
-function exportFiles() {
-  var myTotalDocs = app.documents;
-  for (var i = myTotalDocs.length - 1; i >= 0; i--) {
+    app.open(myTotalDocs[i]);
     exportGalley();
     exportLayout();
     app.activeDocument.close();
