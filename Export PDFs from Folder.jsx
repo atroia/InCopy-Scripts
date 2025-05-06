@@ -12,6 +12,8 @@ v1.0.1 - added iteration into myTotalDocs so that
 exportGallery() and exportLayout() would only run on one
 open file and once run, close the files. Added try block
 to main()
+v1.0.2 - added userInteration preferences to supress 
+"Missing Font" dialog
 -------------------------------------- */
 
 var scptName = "Export PDFs from Folder";
@@ -21,7 +23,9 @@ var FULL;
 
 function main() {
   try{
+    app.scriptPreferences.userInteractionLevel = UserInteractionLevels.NEVER_INTERACT; // surpress "Missing Fonts" dialog
     openFiles();
+    app.scriptPreferences.userInteractionLevel = UserInteractionLevels.INTERACT_WITH_ALL; // Allow all dialogs again.
   } catch (e) {
     alert(e.line);
   }
