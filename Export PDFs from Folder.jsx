@@ -17,7 +17,7 @@ v1.0.2 - added userInteration preferences to supress
 -------------------------------------- */
 
 var scptName = "Export PDFs from Folder";
-var scptVersion = "v1.0.1";
+var scptVersion = "v1.0.2";
 var thePath;
 var FULL;
 
